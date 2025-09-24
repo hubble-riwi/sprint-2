@@ -21,10 +21,10 @@ public class UserController
         }
     }
 
-    public void Delete()
+    public async void Delete()
     {
-        using (var db = new AppDbContext(Credentials))
-        {
+        
+        
             Console.Clear();
             bool flag = true;
 
@@ -46,20 +46,72 @@ public class UserController
 
                         if (int.TryParse(validation, out int id))
                         {
-                            
-                        }
+                            using (var db = new AppDbContext(Credentials))
+                            {
+                                if (db.users.Any(x => x.Id == int.Parse(validation)))
+                                {
+                                    Console.Write($"¿Está seguro de eliminar este usuario? (S/N)");
+                                    string delete = Console.ReadLine();
 
-                        if (db.users.Any(x => x.Id == int.Parse(validation)))
-                        {
-                            
+                                    if (delete != "N")
+                                    {
+                                        User user = db.users.First(x => x.Id == id); 
+                                        db.users.Remove(user);
+                                        db.SaveChangesAsync();
+                                        Console.WriteLine("Usuario eliminado!");
+                                    }
+                                    else
+                                    {
+                                        continue;
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Usuario no encontrado!");
+                                }
+                            }   
                         }
                         else
                         {
-                            
+                            Console.WriteLine("Ingrese un campo valido!");
                         }
                         break;
 
                     case "2":
+                        // Console.Write("Ingrese el correo del usuario: ");
+                        // validation = Console.ReadLine();
+                        //
+                        // if (int.TryParse(validation, out int id))
+                        // {
+                        //     using (var db = new AppDbContext(Credentials))
+                        //     {
+                        //         if (db.users.Any(x => x.Id == int.Parse(validation)))
+                        //         {
+                        //             Console.Write($"¿Está seguro de eliminar este usuario? (S/N)");
+                        //             string delete = Console.ReadLine();
+                        //
+                        //             if (delete != "N")
+                        //             {
+                        //                 User user = db.users.First(x => x.Id == id); 
+                        //                 db.users.Remove(user);
+                        //                 db.SaveChangesAsync();
+                        //                 Console.WriteLine("Usuario eliminado!");
+                        //             }
+                        //             else
+                        //             {
+                        //                 continue;
+                        //             }
+                        //         }
+                        //         else
+                        //         {
+                        //             Console.WriteLine("Usuario no encontrado!");
+                        //         }
+                        //     }   
+                        // }
+                        // else
+                        // {
+                        //     Console.WriteLine("Ingrese un campo valido!");
+                        // }
 
                         break;
 
@@ -72,7 +124,7 @@ public class UserController
                         break;
                 }
             }
-        }
+        
     }
 
 }
