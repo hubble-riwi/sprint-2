@@ -6,13 +6,13 @@ namespace sprint_2.Controllers;
 public class UserController
 {
     private string Credentials { get; set; }
-    
+
     public UserController(string credentials)
     {
         Credentials = credentials;
     }
-    
-    // 🔹 READ (todos)
+
+
     public List<User> GetAllUsers()
     {
         using (var db = new AppDbContext(Credentials))
@@ -20,4 +20,5 @@ public class UserController
             return db.users.ToList();
         }
     }
+
 }
