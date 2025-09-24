@@ -20,9 +20,14 @@ while (flag)
     switch (option)
     {
         case "1":
-
+            string firstName = db.EmptyInputValidator("Nombre: ");
+            string lastName = db.EmptyInputValidator("Apellido: ");
+            string userName = db.EmptyInputValidator("Nombre de usuario: ");
+            string email = db.EmptyInputValidator("Email: ");
+            string password = db.EmptyInputValidator("Contraseña: ");
+            User newUser = new User(firstName, lastName, userName, email, password);
+            db.RegisterUser(newUser);
             break;
-        
         case "2":
 
             break;
