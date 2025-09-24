@@ -33,7 +33,7 @@ while (flag)
             break;
         
         case "3":
-
+            db.Delete();
             break;
         
         case "4":
@@ -163,3 +163,5 @@ while (flag)
             break;
     }
 }
+
+
