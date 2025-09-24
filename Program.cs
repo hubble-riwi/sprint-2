@@ -68,6 +68,12 @@ while (flag)
                             switch (optList)
                             {
                                 case "1":
+                                    var listUser = db.GetAllUsers();
+
+                                    foreach (User user in listUser)
+                                    {
+                                        
+                                    }
                                     break;
                                 case "2":
                                     break;
