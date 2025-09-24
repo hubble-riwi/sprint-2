@@ -4,16 +4,6 @@ using sprint_2.Models;
 var db = new UserController(
     "Server=168.119.183.3;Database=tren_hubble;User=root;Password=g0tIFJEQsKHm5$34Pxu1;Port=3307");
 
-/*foreach (var user in db.GetAllUsers())
-{
-    Console.WriteLine($" {user.Id} {user.FirstName} {user.Email}");
-}
-
-foreach (var user in db.GetAllUsers())
-{
-    Console.WriteLine($" {user.Id} {user.FirstName} {user.Email}");
-}*/
-
 bool flag = true;
 
 while (flag)
