@@ -388,4 +388,20 @@ public class UserController
             return db.users.Where(u => string.IsNullOrEmpty(u.Address)).ToList();
         }
     }
+
+    public List<User> LastedRegisteredUsers()
+    {
+        using (var db = new AppDbContext(Credentials))
+        {
+            return db.users.OrderByDescending(u => u.CreatedAt).Take(10).ToList();
+        }
+    }
+
+    public List<User> UsersOrderByLastName()
+    {
+        using (var db = new AppDbContext(Credentials))
+        {
+            return db.users.OrderBy(u => u.LastName).ToList();
+        }
+    }
 }
