@@ -1,5 +1,4 @@
 using System.Globalization;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using sprint_2.Data;
 using sprint_2.Models;
 
@@ -265,12 +264,12 @@ public class UserController
         string LastName,
         string Username,
         string Email,
-        int Phone,
-        int CellPhone,
+        string Phone,
+        string CellPhone,
         string Address,
         string City,
         string State,
-        int Zipcode,
+        string Zipcode,
         string Country,
         string Gender,
         int Age,
@@ -285,12 +284,12 @@ public class UserController
                 user.LastName = LastName;
                 user.Username = Username;
                 user.Email = Email;
-                user.Phone = Phone.ToString();
-                user.CellPhone = CellPhone.ToString();
+                user.Phone = Phone;
+                user.CellPhone = CellPhone;
                 user.Address = Address;
                 user.City = City;
                 user.State = State;
-                user.Zipcode = Zipcode.ToString();
+                user.Zipcode = Zipcode;
                 user.Country = Country;
                 user.Gender = Gender;
                 user.Age = Age;
@@ -387,6 +386,22 @@ public class UserController
         using (var db = new AppDbContext(Credentials))
         {
             return db.users.Where(u => string.IsNullOrEmpty(u.Address)).ToList();
+        }
+    }
+
+    public List<User> LastedRegisteredUsers()
+    {
+        using (var db = new AppDbContext(Credentials))
+        {
+            return db.users.OrderByDescending(u => u.CreatedAt).Take(10).ToList();
+        }
+    }
+
+    public List<User> UsersOrderByLastName()
+    {
+        using (var db = new AppDbContext(Credentials))
+        {
+            return db.users.OrderBy(u => u.LastName).ToList();
         }
     }
 

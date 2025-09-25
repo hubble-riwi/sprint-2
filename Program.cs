@@ -4,25 +4,20 @@ using sprint_2.Models;
 var db = new UserController(
     "Server=168.119.183.3;Database=tren_hubble;User=root;Password=g0tIFJEQsKHm5$34Pxu1;Port=3307");
 
-foreach (var user in db.GetAllUsers())
-{
-    Console.WriteLine($" UserID:{user.Id} Firstname:{user.FirstName} Lastname:{user.LastName} Username:{user.Username} Email:{user.Email} phone:{user.Phone} cellphone:{user.CellPhone} Address:{user.Address} City:{user.City} State:{user.State} ZipCode:{user.Zipcode} Country:{user.Country} Gender:{user.Gender} Age:{user.Age} Password:{user.Password}");
-}
-
 bool flag = true;
+string gender;
 
 while (flag)
 {
-    Console.Write("-- Creacion y gestion de usuarios --\n" +
+    Console.Write("\t---- Creacion y gestion de usuarios ----\n" +
                   "1. Crear usuario \n" +
                   "2. Actualizar usuario \n" +
                   "3. Eliminar usuario \n" +
-                  "4. Buscar usuario\n" +
+                  "4. Consultas\n" +
                   "5. Salir\n" +
                   ">> ");
-    Console.Write("Select an option:");
     string option = Console.ReadLine();
-    string gender;
+
     switch (option)
     {
         case "1":
@@ -54,10 +49,10 @@ while (flag)
         email = Console.ReadLine();
         
         Console.Write("Nuevo numero de telefono:");
-        int phone = int.Parse(Console.ReadLine());
+        string phone = Console.ReadLine();
         
         Console.Write("Nuevo numero de celular:");
-        int cellphone = int.Parse(Console.ReadLine());
+        string cellphone = Console.ReadLine();
         
         Console.Write("Nueva Direccion de residencia:");
         string address = Console.ReadLine();
@@ -69,7 +64,7 @@ while (flag)
         string state = Console.ReadLine();
         
         Console.Write("Nuevo codigo ZIP:");
-        int zipcode = int.Parse(Console.ReadLine());
+        string zipcode = Console.ReadLine();
         
         Console.Write("Nuevo pais:");
         string country = Console.ReadLine();
@@ -77,17 +72,17 @@ while (flag)
         while (true)
         {
             Console.WriteLine("Nuevo genero (Femenino, masculino):");
-            gender = Console.ReadLine().ToLower().Trim();
+             string gen = Console.ReadLine().ToLower().Trim();
 
-            if (gender != "masculino" && gender != "femenino")
+           if (gen != "masculino" && gen != "femenino")
             {
                 Console.WriteLine("Ingresa un genero valido");
                     continue;
             }
             else
             {
-                Console.WriteLine("El genero ha sido actualizado");
-                    break;
+                gender = gen == "masculino" ? "male" : "female";
+                break;
             }
         }
 
@@ -109,27 +104,30 @@ while (flag)
             }
         }
         
+        Console.Write("Nueva edad:");
+        age = int.Parse(Console.ReadLine());
         
-        Console.Write("Nueva contrasena (OPCIONAL):");
-        password = Console.ReadLine();
+        Console.Write("Nueva contraseña (opcional): ");
+         password = Console.ReadLine();
         
-        Console.Write("Confirma la nueva contrasena");
+        Console.Write("Confirme la contraseña: ");
         string confirmPassword = Console.ReadLine();
 
         if (password != confirmPassword)
         {
-            Console.WriteLine("La contrasenas ingresadas no coinciden");
+            Console.WriteLine("Las contraseñas no coinciden");
             password = null;
         }
         else
         {
-            Console.WriteLine("La contrasena ha sido actualizada exitosamente ...");
+            Console.WriteLine("Las contraseñas han sido actualizadas");
         }
         
         
         //call the controller
         db.UpdateUser(id,firstName,lastName,username,email,phone,cellphone,address,city,state,zipcode,country,gender,age,password);
         break;
+            break;
         
         case "3":
             Console.Clear();
@@ -141,7 +139,7 @@ while (flag)
             bool main = true;
             while (main)
             {
-                Console.Write("---- Consultas del sistema ----\n" +
+                Console.Write("\t---- Consultas del sistema ----\n" +
                                   "1. Listar usuarios\n" +
                                   "2. Contar usuarios\n" +
                                   "3. Mostrar usuarios\n" +
@@ -155,7 +153,7 @@ while (flag)
                         bool menuList = true;
                         while (menuList)
                         {
-                            Console.Write("---- Listar usuarios ----\n\n" +
+                            Console.Write("\t---- Listar usuarios ----\n\n" +
                                           "1. Listar nombres y correos\n" +
                                           "2. Listar todos los usuarios\n" +
                                           "3. Listar usuarios por ciudad\n" +
@@ -171,7 +169,7 @@ while (flag)
                             {
                                 case "1":
                                     Console.Clear();
-                                    Console.WriteLine("---- Listar nombres y correos ----");
+                                    Console.WriteLine("\t---- Listar nombres y correos ----");
                                     var usersList = db.ListNamesEmails();
                                     foreach (var user in usersList)
                                     {
@@ -185,20 +183,20 @@ while (flag)
                                     foreach (User user in listUser)
                                     {
                                         Console.WriteLine($"- Id: {user.Id} \n" +
-                                                          $"- First name: {user.FirstName}\n" +
-                                                          $"- Last name: {user.LastName}\n" +
-                                                          $"- Username: {user.Username}\n" +
-                                                          $"- Email: {user.Email} \n" +
-                                                          $"- Phone: {user.Phone} \n" +
-                                                          $"- Cellphone: {user.CellPhone} \n" +
-                                                          $"- Addres: {user.Address} \n" +
-                                                          $"- City: {user.City} \n" +
-                                                          $"- State: {user.State} \n" +
-                                                          $"- Zipcode: {user.Zipcode} \n" +
-                                                          $"- Country: {user.Country} \n" +
-                                                          $"- Gender: {user.Gender} \n" +
-                                                          $"- Age: {user.Age} \n" +
-                                                          $"- Password: {user.Password?? "Sin contraseña"}");
+                                                          $"- Nombres: {user.FirstName}\n" +
+                                                          $"- Apellidos: {user.LastName}\n" +
+                                                          $"- Nombre de usuario: {user.Username}\n" +
+                                                          $"- Correo: {user.Email} \n" +
+                                                          $"- Telefono: {user.Phone} \n" +
+                                                          $"- Numero de celular: {user.CellPhone} \n" +
+                                                          $"- Direccion: {user.Address} \n" +
+                                                          $"- Ciudad: {user.City} \n" +
+                                                          $"- Estado: {user.State} \n" +
+                                                          $"- Codigo postal: {user.Zipcode} \n" +
+                                                          $"- Pais: {user.Country} \n" +
+                                                          $"- Genero: {user.Gender} \n" +
+                                                          $"- Edad: {user.Age} \n" +
+                                                          $"- Contraseña: {user.Password?? "Sin contraseña"}");
                                     }
                                     break;
                                 case "3":
@@ -228,7 +226,7 @@ while (flag)
                                     break;
                                 case "5":
                                     Console.Clear();
-                                    Console.Write("---- Listar por género ----" +
+                                    Console.Write("\t---- Listar por género ----" +
                                                   "Ingrese el género: \n" +
                                                   "F. Femenino\n" +
                                                   "M. Masculino\n" +
@@ -255,9 +253,21 @@ while (flag)
                                     break;
                                 case "7":
                                     Console.Clear();
+                                    Console.Write("\t---- Últimos usuarios registrados ----\n");
+                                    var recentUsers = db.LastedRegisteredUsers();
+                                    foreach (var user in recentUsers)
+                                    {
+                                        Console.WriteLine($"Nombre: {user.FirstName} {user.LastName},\nEmail: {user.Email},\nFecha de registro: {user.CreatedAt}\n\n");
+                                    }
                                     break;
                                 case "8":
                                     Console.Clear();
+                                    Console.Write("\t---- Todos los usuarios ----\n");
+                                    var usersOrder = db.UsersOrderByLastName();
+                                    foreach (var user in usersOrder)
+                                    {
+                                        Console.WriteLine($"Nombre: {user.LastName} {user.FirstName},\nEmail: {user.Email}\n");
+                                    }
                                     break;
                                 case "9":
                                     Console.Clear();
@@ -273,8 +283,8 @@ while (flag)
                         bool mainCount = true;
                         while (mainCount)
                         {
-                            Console.Write("---- Contar usuarios ----\n" +
-                                          "1. Contar usuarios por ciudad\n " +
+                            Console.Write("\t---- Contar usuarios ----\n" +
+                                          "1. Contar usuarios por ciudad\n" +
                                           "2. Contar usuarios por país\n" +
                                           "3. Contar usuarios totales\n" +
                                           "4. Volver al menú anterior\n" +
@@ -286,7 +296,7 @@ while (flag)
                                     Console.Clear();
                                     var countsByCity = db.CountUsersByCity();
     
-                                    Console.WriteLine("---- Usuarios por ciudad ----");
+                                    Console.WriteLine("\t---- Usuarios por ciudad ----");
                                     foreach (var entry in countsByCity)
                                     {
                                         Console.WriteLine($"Ciudad: {entry.Key} — {entry.Value} usuarios");
@@ -297,7 +307,7 @@ while (flag)
                                     Console.Clear();
                                     var countsByCountry = db.CountUsersByCountry();
     
-                                    Console.WriteLine("---- Usuarios por ciudad ----");
+                                    Console.WriteLine("\t---- Usuarios por ciudad ----");
                                     foreach (var entry in countsByCountry)
                                     {
                                         Console.WriteLine($"País: {entry.Key} — {entry.Value} usuarios");
@@ -307,7 +317,7 @@ while (flag)
                                 case "3":
                                     Console.Clear();
                                     int totalUsers = db.CountUsers();
-                                    Console.WriteLine($"---- Registros ----\n" +
+                                    Console.WriteLine($"\t---- Registros ----\n" +
                                                       $"Total de usuarios registrados: {totalUsers}\n");
                                     break;
                                 case "4":
@@ -322,7 +332,7 @@ while (flag)
                         bool menuShow = true;
                         while (menuShow)
                         {
-                            Console.Write("---- Mostrar usuarios ----\n\n" +
+                            Console.Write("\t---- Mostrar usuarios ----\n\n" +
                                           "1. Usuarios sin dirección\n" +
                                           "2. Usuarios sin teléfono\n" +
                                           "3. Ver usuario por correo\n" +
@@ -334,7 +344,7 @@ while (flag)
                             {
                                 case "1":
                                     Console.Clear();
-                                    Console.WriteLine("---- Usuarios sin dirección registrada ----");
+                                    Console.WriteLine("\t---- Usuarios sin dirección registrada ----");
                                     var usersWithoutAddress = db.GetUsersWithoutAddress();
 
                                     if (usersWithoutAddress.Count == 0)
@@ -353,7 +363,7 @@ while (flag)
                                 
                                 case "2":
                                     Console.Clear();
-                                    Console.WriteLine("---- Usuarios sin teléfono registrado ----");
+                                    Console.WriteLine("\t---- Usuarios sin teléfono registrado ----");
                                     var usersWithoutPhone = db.GetUsersWithoutPhone();
 
                                     if (usersWithoutPhone.Count == 0)
@@ -392,6 +402,7 @@ while (flag)
                                                           $"Edad: {userByEmail.Age}");
                                     }
                                     break;
+                                
                                 case "4":
                                     Console.Clear();
                                     break;
