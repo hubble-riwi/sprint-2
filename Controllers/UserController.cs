@@ -127,17 +127,17 @@ public class UserController
         {
             if (UserNameTaken(user))
             {
-                Console.WriteLine("Username already taken");
+                Console.WriteLine("Nombre de usuario ya existe");
             }
             else if (EmailTaken(user))
             {
-                Console.WriteLine("Email already taken");
+                Console.WriteLine("Este usuario ya existe");
             }
             else
             {
                 db.users.Add(user);
-                Console.WriteLine("User successfully registered");
-                Console.WriteLine($"\tFirst name: {user.FirstName}, \n\tLastname = {user.LastName}, \n\tUsername = {user.Username} \n\tEmail = {user.Email}");
+                Console.WriteLine("Usuario registrado con exito");
+                Console.WriteLine($"\tNombres: {user.FirstName}, \n\tApellidos = {user.LastName}, \n\tNombre de usuario = {user.Username} \n\tCorreo = {user.Email}");
                 db.SaveChanges();
             }
         }
@@ -188,14 +188,14 @@ public class UserController
                     foreach (var user in result)
                     {
                         Console.Clear();
-                        Console.WriteLine($"\tFirst name: {user.FirstName}, \n\tLastname = {user.LastName}, \n\tUsername = {user.Username} \n\tEmail = {user.Email}");
+                        Console.WriteLine($"\tNombres: {user.FirstName}, \n\tApellidos = {user.LastName}, \n\tNombre usuario: = {user.Username} \n\tCorreo: = {user.Email}");
                         Console.WriteLine("");
                     }
                 }
                 else
                 {
                     Console.Clear();
-                    Console.WriteLine("No users found");
+                    Console.WriteLine("Usurios no encontrados");
                 }
             }
         }
@@ -211,14 +211,14 @@ public class UserController
                 {
                     foreach (var user in result)
                     {
-                        Console.WriteLine($"\tFirst name: {user.FirstName}, \n\tLastname = {user.LastName}, \n\tUsername = {user.Username} \n\tEmail = {user.Email}, \n\tAge = {user.Age}");
+                        Console.WriteLine($"\tNombres: {user.FirstName}, \n\tApellidos = {user.LastName}, \n\tNombre de usuario = {user.Username} \n\tCorreo = {user.Email}, \n\tEdad = {user.Age}");
                         Console.WriteLine("");
                     }
                 }
                 else
                 {
                     Console.Clear();
-                    Console.WriteLine("No users found");
+                    Console.WriteLine("Usuario no encontrados");
                 }
             }
         }
@@ -236,7 +236,7 @@ public class UserController
             }
             else
             {
-                Console.WriteLine("Value required, try again");
+                Console.WriteLine("Se necesita un email, intentelo de nuevo");
             }
         }
     }
@@ -252,7 +252,7 @@ public class UserController
             }
             else
             {
-                Console.WriteLine("Value not a number");
+                Console.WriteLine("Valor ingresado incorrecto");
             }
         }
     }
@@ -298,11 +298,11 @@ public class UserController
                 if (!string.IsNullOrWhiteSpace(Password)) user.Password = Password;
                 
                 db.SaveChanges();
-                Console.WriteLine($"User {id} has been updated");
+                Console.WriteLine($"Usuario con id {id} ha sido actualizado");
             }
             else
             {
-                Console.WriteLine("User not found");
+                Console.WriteLine("Usuario no encontrado");
             }
         }
         
