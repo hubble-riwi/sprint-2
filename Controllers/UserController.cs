@@ -1,4 +1,5 @@
 using System.Globalization;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using sprint_2.Data;
 using sprint_2.Models;
 
@@ -386,6 +387,22 @@ public class UserController
         using (var db = new AppDbContext(Credentials))
         {
             return db.users.Where(u => string.IsNullOrEmpty(u.Address)).ToList();
+        }
+    }
+
+    public User? GetUserByEmail(String email)
+    {
+        using (var db = new AppDbContext(Credentials))
+        {
+            return db.users.FirstOrDefault(u => u.Email == email);
+        }
+    }
+
+    public List<User> GetUserByCity(string city)
+    {
+        using (var db = new AppDbContext(Credentials))
+        {
+            return db.users.Where(u => u.City.ToLower() == city.ToLower()).ToList();
         }
     }
 }
