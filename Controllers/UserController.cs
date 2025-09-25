@@ -192,4 +192,85 @@ public class UserController
             }
         }
     }
+
+    public List<User> ListSpecificGender(string gender)
+    {
+        using (var db = new AppDbContext(Credentials))
+        {
+            if (gender == "f")
+            {
+                return db.users.Where(g => g.Gender == "female").ToList();
+            }
+            else
+            {
+                return db.users.Where(g => g.Gender == "male").ToList();
+            }
+        }
+    }
+    
+    public List<User> ListNamesEmails()
+    {
+        using (var db = new AppDbContext(Credentials))
+        {
+            return db.users.Select(u => new User(u.FirstName, u.LastName, u.Username, u.Email, null)).ToList();
+        }
+    }
+    
+    public int CountUsers()
+    {
+        using (var db = new AppDbContext(Credentials))
+        {
+            return db.users.Count();
+        }
+    }
+
+    public Dictionary<string, int> CountUsersByCity()
+    {
+        using (var db = new AppDbContext(Credentials))
+        {
+            var users = db.users
+                .Select(u => new
+                {
+                    City = u.City == null || u.City.Trim() == "" ? "Sin ciudad" : u.City
+                }).ToList();
+            
+            return users
+                .GroupBy(u => u.City)
+                .ToDictionary(g => g.Key, g => g.Count());
+        }
+    }
+    
+    public Dictionary<string, int> CountUsersByCountry()
+    {
+        using (var db = new AppDbContext(Credentials))
+        {
+            var users = db.users
+                .Select(u => new
+                {
+                    Country = u.Country == null || u.Country.Trim() == "" ? "Sin ciudad" : u.Country
+                }).ToList();
+
+            return users
+                .GroupBy(u => u.Country)
+                .ToDictionary(g => g.Key, g => g.Count());
+        }
+    }
+    
+    public List<User> GetUsersWithoutPhone()
+    {
+        using (var db = new AppDbContext(Credentials))
+        {
+            return db.users
+                .Where(u => string.IsNullOrEmpty(u.Phone))
+                .ToList();
+        }
+    }
+    
+    public List<User> GetUsersWithoutAddress()
+    {
+        using (var db = new AppDbContext(Credentials))
+        {
+            return db.users.Where(u => string.IsNullOrEmpty(u.Address)).ToList();
+        }
+    }
 }

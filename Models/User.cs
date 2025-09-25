@@ -31,7 +31,7 @@ public class User
     public string Address { get; set; }
 
     [Column("city")]
-    public string City { get; set; }
+    public string? City { get; set; }
 
     [Column("state")]
     public string State { get; set; }
@@ -40,7 +40,7 @@ public class User
     public string Zipcode { get; set; }
 
     [Column("country")]
-    public string Country { get; set; }
+    public string? Country { get; set; }
 
     [Column("gender")]
     public string Gender { get; set; } 

@@ -20,6 +20,7 @@ while (flag)
     switch (option)
     {
         case "1":
+            Console.Clear();
             string firstName = db.EmptyInputValidator("Nombre: ");
             string lastName = db.EmptyInputValidator("Apellido: ");
             string userName = db.EmptyInputValidator("Nombre de usuario: ");
@@ -33,10 +34,12 @@ while (flag)
             break;
         
         case "3":
+            Console.Clear();
             db.Delete();
             break;
         
         case "4":
+            Console.Clear();
             bool main = true;
             while (main)
             {
@@ -50,6 +53,7 @@ while (flag)
                 switch (opt)
                 {
                     case "1":
+                        Console.Clear();
                         bool menuList = true;
                         while (menuList)
                         {
@@ -68,22 +72,57 @@ while (flag)
                             switch (optList)
                             {
                                 case "1":
+                                    Console.Clear();
+                                    Console.WriteLine("---- Listar nombres y correos ----");
+                                    var usersList = db.ListNamesEmails();
+                                    foreach (var user in usersList)
+                                    {
+                                        Console.WriteLine($"Nombre: {user.FirstName} {user.LastName}, Email: {user.Email}");
+                                    }
                                     break;
+                                
                                 case "2":
+                                    Console.Clear();
                                     break;
                                 case "3":
+                                    Console.Clear();
                                     break;
                                 case "4":
+                                    Console.Clear();
                                     break;
                                 case "5":
+                                    Console.Clear();
+                                    Console.Write("---- Listar por género ----" +
+                                                  "Ingrese el género: \n" +
+                                                  "F. Femenino\n" +
+                                                  "M. Masculino\n" +
+                                                  ">> ");
+                                    string genderInput = Console.ReadLine().ToLower();
+
+                                    if (genderInput == "f" || genderInput == "m")
+                                    {
+                                        var users = db.ListSpecificGender(genderInput);
+                                        foreach (var user in users)
+                                        {
+                                            Console.WriteLine($"Nombre: {user.FirstName} {user.LastName}, Email: {user.Email}, Género: {user.Gender}");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Género inválido. Por favor ingrese 'f' o 'm'.");
+                                    }
                                     break;
                                 case "6":
+                                    Console.Clear();
                                     break;
                                 case "7":
+                                    Console.Clear();
                                     break;
                                 case "8":
+                                    Console.Clear();
                                     break;
                                 case "9":
+                                    Console.Clear();
                                     menuList = false;
                                     break;
                             }
@@ -92,23 +131,46 @@ while (flag)
                         break;
                     
                     case "2":
+                        Console.Clear();
                         bool mainCount = true;
                         while (mainCount)
                         {
-                            Console.Write("---- Contar usuarios ----\n\n" +
+                            Console.Write("---- Contar usuarios ----\n" +
                                           "1. Contar usuarios por ciudad\n " +
                                           "2. Contar usuarios por país\n" +
-                                          "3. Contar usuarios totales" +
+                                          "3. Contar usuarios totales\n" +
                                           "4. Volver al menú anterior\n" +
                                           ">> ");
                             string optCount = Console.ReadLine();
                             switch (optCount)
                             {
                                 case "1":
+                                    Console.Clear();
+                                    var countsByCity = db.CountUsersByCity();
+    
+                                    Console.WriteLine("---- Usuarios por ciudad ----");
+                                    foreach (var entry in countsByCity)
+                                    {
+                                        Console.WriteLine($"Ciudad: {entry.Key} — {entry.Value} usuarios");
+                                    }
                                     break;
+                                
                                 case "2":
+                                    Console.Clear();
+                                    var countsByCountry = db.CountUsersByCountry();
+    
+                                    Console.WriteLine("---- Usuarios por ciudad ----");
+                                    foreach (var entry in countsByCountry)
+                                    {
+                                        Console.WriteLine($"País: {entry.Key} — {entry.Value} usuarios");
+                                    }
                                     break;
+                                
                                 case "3":
+                                    Console.Clear();
+                                    int totalUsers = db.CountUsers();
+                                    Console.WriteLine($"---- Registros ----\n" +
+                                                      $"Total de usuarios registrados: {totalUsers}\n");
                                     break;
                                 case "4":
                                     mainCount = false;
@@ -118,6 +180,7 @@ while (flag)
                         break;
                     
                     case "3":
+                        Console.Clear();
                         bool menuShow = true;
                         while (menuShow)
                         {
@@ -132,14 +195,52 @@ while (flag)
                             switch (optShow)
                             {
                                 case "1":
+                                    Console.Clear();
+                                    Console.WriteLine("---- Usuarios sin dirección registrada ----");
+                                    var usersWithoutAddress = db.GetUsersWithoutAddress();
+
+                                    if (usersWithoutAddress.Count == 0)
+                                    {
+                                        Console.WriteLine("Todos los usuarios tienen dirección registrada.");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Usuarios sin teléfono registrado:");
+                                        foreach (var user in usersWithoutAddress)
+                                        {
+                                            Console.WriteLine($"- {user.FirstName} {user.LastName} ({user.Email})");
+                                        }
+                                    }
                                     break;
+                                
                                 case "2":
+                                    Console.Clear();
+                                    Console.WriteLine("---- Usuarios sin teléfono registrado ----");
+                                    var usersWithoutPhone = db.GetUsersWithoutPhone();
+
+                                    if (usersWithoutPhone.Count == 0)
+                                    {
+                                        Console.WriteLine("Todos los usuarios tienen teléfono registrado.");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Usuarios sin teléfono registrado:");
+                                        foreach (var user in usersWithoutPhone)
+                                        {
+                                            Console.WriteLine($"- {user.FirstName} {user.LastName} ({user.Email})");
+                                        }
+                                    }
                                     break;
+                                
                                 case "3":
+                                    Console.Clear();
                                     break;
+                                
                                 case "4":
+                                    Console.Clear();
                                     break;
                                 case "5":
+                                    Console.Clear();
                                     menuShow = false;
                                     break;
                             }
@@ -147,6 +248,7 @@ while (flag)
                         break;
                     
                     case "4":
+                        Console.Clear();
                         main = false;
                         break;
                 }
@@ -155,6 +257,7 @@ while (flag)
             break;
         
         case "5":
+            Console.WriteLine("Saliendo...");
             flag = false;
             break;
         
