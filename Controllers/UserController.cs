@@ -28,12 +28,12 @@ public class UserController
         string LastName,
         string Username,
         string Email,
-        string Phone,
-        string CellPhone,
+        int Phone,
+        int CellPhone,
         string Address,
         string City,
         string State,
-        string Zipcode,
+        int Zipcode,
         string Country,
         string Gender,
         int Age,
@@ -48,12 +48,12 @@ public class UserController
                 user.LastName = LastName;
                 user.Username = Username;
                 user.Email = Email;
-                user.Phone = Phone;
-                user.CellPhone = CellPhone;
+                user.Phone = Phone.ToString();
+                user.CellPhone = CellPhone.ToString();
                 user.Address = Address;
                 user.City = City;
                 user.State = State;
-                user.Zipcode = Zipcode;
+                user.Zipcode = Zipcode.ToString();
                 user.Country = Country;
                 user.Gender = Gender;
                 user.Age = Age;

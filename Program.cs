@@ -30,76 +30,92 @@ while (flag)
             break;
         
         case "2":
-        Console.WriteLine("Enter the ID of user if you want Update:");
+        Console.WriteLine("Ingresa el ID que deseas actualizar:");
         int id = int.Parse(Console.ReadLine());
         
-        Console.WriteLine("New name:");
+        Console.WriteLine("Nuevo nombre:");
         string firstName = Console.ReadLine();
         
-        Console.WriteLine("New last name:");
+        Console.WriteLine("Nuevo apellido:");
         string lastName = Console.ReadLine();
         
-        Console.WriteLine("New Username:");
+        Console.WriteLine("Nuevo nombre de usuario:");
         string username = Console.ReadLine();
         
-        Console.WriteLine("New email:");
+        Console.WriteLine("Nuevo email:");
         string email = Console.ReadLine();
         
-        Console.Write("New phone:");
-        string phone = Console.ReadLine();
+        Console.Write("Nuevo numero de telefono:");
+        int phone = int.Parse(Console.ReadLine());
         
-        Console.Write("New cellphone:");
-        string cellphone = Console.ReadLine();
+        Console.Write("Nuevo numero de celular:");
+        int cellphone = int.Parse(Console.ReadLine());
         
-        Console.Write("New address:");
+        Console.Write("Nueva Direccion de residencia:");
         string address = Console.ReadLine();
         
-        Console.Write("New city:");
+        Console.Write("Nueva ciudad:");
         string city = Console.ReadLine();
         
-        Console.Write("New state:");
+        Console.Write("Nuevo estado:");
         string state = Console.ReadLine();
         
-        Console.Write("New zipcode:");
-        string zipcode = Console.ReadLine();
+        Console.Write("Nuevo codigo ZIP:");
+        int zipcode = int.Parse(Console.ReadLine());
         
-        Console.Write("New country:");
+        Console.Write("Nuevo pais:");
         string country = Console.ReadLine();
 
         while (true)
         {
-            Console.WriteLine("New gender (Female, Male):");
+            Console.WriteLine("Nuevo genero (Femenino, masculino):");
             gender = Console.ReadLine().ToLower().Trim();
 
-            if (gender != "male" && gender != "female")
+            if (gender != "masculino" && gender != "femenino")
             {
-                Console.WriteLine("Enter a valid gender");
+                Console.WriteLine("Ingresa un genero valido");
                     continue;
             }
             else
             {
-                Console.WriteLine("The gender has updated ");
+                Console.WriteLine("El genero ha sido actualizado");
                     break;
             }
         }
+
+        int age;
+        while (true)
+        {
+            
+            Console.Write("Nueva edad:");
+            string inputAge = Console.ReadLine();
+
+            if (int.TryParse(inputAge, out age))
+            {
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Ingresa una edad valida en numero entero...");
+                continue;
+            }
+        }
         
-        Console.Write("New age:");
-        int age = int.Parse(Console.ReadLine());
         
-        Console.Write("New password (OPTIONAL):");
+        Console.Write("Nueva contrasena (OPCIONAL):");
         string password = Console.ReadLine();
         
-        Console.Write("Confirm the new password:");
+        Console.Write("Confirma la nueva contrasena");
         string confirmPassword = Console.ReadLine();
 
         if (password != confirmPassword)
         {
-            Console.WriteLine("The password dont match...dont update the password");
+            Console.WriteLine("La contrasenas ingresadas no coinciden");
             password = null;
         }
         else
         {
-            Console.WriteLine("The password has been update for the user ...");
+            Console.WriteLine("La contrasena ha sido actualizada exitosamente ...");
         }
         
         
@@ -119,7 +135,7 @@ while (flag)
             flag = false;
             break;
         default:
-            Console.WriteLine("Enter a valid option...");
+            Console.WriteLine("Ingresa una opcion valida...");
             break;
     }
 }
