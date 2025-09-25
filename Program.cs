@@ -160,7 +160,26 @@ while (flag)
                                     break;
                                 
                                 case "2":
-                                    Console.Clear();
+                                    var listUser = db.GetAllUsers();
+                                    Console.WriteLine("List of the all users");
+                                    foreach (User user in listUser)
+                                    {
+                                        Console.WriteLine($"- Id: {user.Id} \n" +
+                                                          $"- First name: {user.FirstName}\n" +
+                                                          $"- Last name: {user.LastName}\n" +
+                                                          $"- Username: {user.Username}\n" +
+                                                          $"- Email: {user.Email} \n" +
+                                                          $"- Phone: {user.Phone} \n" +
+                                                          $"- Cellphone: {user.CellPhone} \n" +
+                                                          $"- Addres: {user.Address} \n" +
+                                                          $"- City: {user.City} \n" +
+                                                          $"- State: {user.State} \n" +
+                                                          $"- Zipcode: {user.Zipcode} \n" +
+                                                          $"- Country: {user.Country} \n" +
+                                                          $"- Gender: {user.Gender} \n" +
+                                                          $"- Age: {user.Age} \n" +
+                                                          $"- Password: {user.Password?? "Sin contraseña"}");
+                                    }
                                     break;
                                 case "3":
                                     Console.Clear();
