@@ -22,7 +22,7 @@ while (flag)
                   ">> ");
     Console.Write("Select an option:");
     string option = Console.ReadLine();
-
+    string gender;
     switch (option)
     {
         case "1":
@@ -65,9 +65,23 @@ while (flag)
         
         Console.Write("New country:");
         string country = Console.ReadLine();
-        
-        Console.Write("New Gender:");
-        string gender = Console.ReadLine();
+
+        while (true)
+        {
+            Console.WriteLine("New gender (Female, Male):");
+            gender = Console.ReadLine().ToLower().Trim();
+
+            if (gender != "male" && gender != "female")
+            {
+                Console.WriteLine("Enter a valid gender");
+                    continue;
+            }
+            else
+            {
+                Console.WriteLine("The gender has updated ");
+                    break;
+            }
+        }
         
         Console.Write("New age:");
         int age = int.Parse(Console.ReadLine());
