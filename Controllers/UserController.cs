@@ -75,8 +75,53 @@ public class UserController
             }
         }
     }
+
+    public void FilterByCountry(string country)
+    {
+        using (var db = new AppDbContext(credentials: Credentials))
+        {
+            var result= db.users.Where(user => user.Country == country).ToList();
+            {
+                if (result.Count != 0)
+                {
+                    foreach (var user in result)
+                    {
+                        Console.Clear();
+                        Console.WriteLine($"\tFirst name: {user.FirstName}, \n\tLastname = {user.LastName}, \n\tUsername = {user.Username} \n\tEmail = {user.Email}");
+                        Console.WriteLine("");
+                    }
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("No users found");
+                }
+            }
+        }
+    }
     
-    
+    public void FilterByAge(int age)
+    {
+        using (var db = new AppDbContext(credentials: Credentials))
+        {
+            var result= db.users.Where(user => user.Age > age).ToList();
+            {
+                if (result.Count != 0)
+                {
+                    foreach (var user in result)
+                    {
+                        Console.WriteLine($"\tFirst name: {user.FirstName}, \n\tLastname = {user.LastName}, \n\tUsername = {user.Username} \n\tEmail = {user.Email}, \n\tAge = {user.Age}");
+                        Console.WriteLine("");
+                    }
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("No users found");
+                }
+            }
+        }
+    }
 
     public string EmptyInputValidator(string prompt)
     {
@@ -91,6 +136,22 @@ public class UserController
             else
             {
                 Console.WriteLine("Value required, try again");
+            }
+        }
+    }
+
+    public int IntegerInputValidator(string prompt)
+    {
+        while (true)
+        {
+            string input = EmptyInputValidator(prompt);
+            if (int.TryParse(input, out var result))
+            {
+                return result;
+            }
+            else
+            {
+                Console.WriteLine("Value not a number");
             }
         }
     }

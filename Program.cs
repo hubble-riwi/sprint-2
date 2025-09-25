@@ -57,7 +57,7 @@ while (flag)
                                           "1. Listar nombres y correos\n" +
                                           "2. Listar todos los usuarios\n" +
                                           "3. Listar usuarios por ciudad\n" +
-                                          "4. Listar usuarios por edad mínima\n" +
+                                          "4. Listar usuarios por edad (Mayor)\n" +
                                           "5. Listar usuarios por género\n" +
                                           "6. Listar usuarios por país\n" +
                                           "7. Últimos usuarios registrados\n" +
@@ -74,10 +74,14 @@ while (flag)
                                 case "3":
                                     break;
                                 case "4":
+                                    int age = db.IntegerInputValidator("Age: ");
+                                    db.FilterByAge(age);
                                     break;
                                 case "5":
                                     break;
                                 case "6":
+                                    string country = db.EmptyInputValidator("País: ");
+                                    db.FilterByCountry(country);
                                     break;
                                 case "7":
                                     break;
