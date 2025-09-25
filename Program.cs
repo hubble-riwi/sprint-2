@@ -27,7 +27,8 @@ while (flag)
             string userName = db.EmptyInputValidator("Nombre de usuario: ");
             string email = db.EmptyInputValidator("Email: ");
             string password = db.EmptyInputValidator("Contraseña: ");
-            User newUser = new User(firstName, lastName, userName, email, password);
+            DateTime createdAt = DateTime.Now;
+            User newUser = new User(firstName, lastName, userName, email, password, createdAt);
             db.RegisterUser(newUser);
             break;
         
