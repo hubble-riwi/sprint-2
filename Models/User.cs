@@ -54,14 +54,25 @@ public class User
 
     [Column("password")]
     public string? Password { get; set; }
+     [Column("created_at")]
+    public DateTime? CreatedAt { get; set; }
     
-    public User(string firstName, string lastName, string username, string email, string password)
+    public User(string firstName, string lastName, string username, string email, string password, DateTime createdAt)
     {
         FirstName = firstName;
         LastName = lastName;
         Username = username;
         Email = email;
         Password = password;
+        CreatedAt = DateTime.Now;
+    }
+    
+    //Override contruct
+    public User(string firstName, string lastName, string email)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+        Email = email;
     }
     
 }
