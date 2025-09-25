@@ -55,4 +55,13 @@ public class User
     [Column("password")]
     public string? Password { get; set; }
     
+    public User(string firstName, string lastName, string username, string email, string password)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+        Username = username;
+        Email = email;
+        Password = password;
+    }
+    
 }
