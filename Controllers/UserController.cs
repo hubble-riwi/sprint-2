@@ -327,7 +327,7 @@ public class UserController
     {
         using (var db = new AppDbContext(Credentials))
         {
-            return db.users.Select(u => new User(u.FirstName, u.LastName, u.Username, u.Email, null)).ToList();
+            return db.users.Select(u => new User(u.FirstName, u.LastName, u.Email)).ToList();
         }
     }
     
