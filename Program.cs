@@ -33,37 +33,37 @@ while (flag)
             break;
         
         case "2":
-        Console.Write("Ingrese el id del usuario que desea actualizar: ");
+        Console.WriteLine("Ingresa el ID que deseas actualizar:");
         int id = int.Parse(Console.ReadLine());
         
-        Console.Write("Nuevo nombre:");
+        Console.WriteLine("Nuevo nombre:");
         firstName = Console.ReadLine();
         
-        Console.Write("Nuevo apellido:");
-         lastName = Console.ReadLine();
+        Console.WriteLine("Nuevo apellido:");
+        lastName = Console.ReadLine();
         
-        Console.Write("Nuevo nombre usuario:");
+        Console.WriteLine("Nuevo nombre de usuario:");
         string username = Console.ReadLine();
         
-        Console.Write("Nuevo email:");
-         email = Console.ReadLine();
+        Console.WriteLine("Nuevo email:");
+        email = Console.ReadLine();
         
-        Console.Write("Nuevo telefono:");
+        Console.Write("Nuevo numero de telefono:");
         string phone = Console.ReadLine();
         
         Console.Write("Nuevo numero de celular:");
         string cellphone = Console.ReadLine();
         
-        Console.Write("Nueva direccion:");
+        Console.Write("Nueva Direccion de residencia:");
         string address = Console.ReadLine();
         
-        Console.Write("Nuevo ciudad:");
+        Console.Write("Nueva ciudad:");
         string city = Console.ReadLine();
         
         Console.Write("Nuevo estado:");
         string state = Console.ReadLine();
         
-        Console.Write("Nuevo codigo postal:");
+        Console.Write("Nuevo codigo ZIP:");
         string zipcode = Console.ReadLine();
         
         Console.Write("Nuevo pais:");
@@ -71,23 +71,41 @@ while (flag)
 
         while (true)
         {
-            Console.WriteLine("Nuevo genero (masculino, femenino):");
-            string gen = Console.ReadLine().ToLower().Trim();
+            Console.WriteLine("Nuevo genero (Femenino, masculino):");
+             string gen = Console.ReadLine().ToLower().Trim();
 
-            if (gen != "masculino" && gen != "femenino")
+           if (gen != "masculino" && gen != "femenino")
             {
-                Console.WriteLine("Enter a valid gender");
+                Console.WriteLine("Ingresa un genero valido");
                     continue;
             }
             else
             {
-                gender = gen == "male" ? "male" : "female";
+                gender = gen == "masculino" ? "male" : "female";
                 break;
+            }
+        }
+
+        int age;
+        while (true)
+        {
+            
+            Console.Write("Nueva edad:");
+            string inputAge = Console.ReadLine();
+
+            if (int.TryParse(inputAge, out age))
+            {
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Ingresa una edad valida en numero entero...");
+                continue;
             }
         }
         
         Console.Write("Nueva edad:");
-        int age = int.Parse(Console.ReadLine());
+        age = int.Parse(Console.ReadLine());
         
         Console.Write("Nueva contraseña (opcional): ");
          password = Console.ReadLine();
@@ -183,6 +201,23 @@ while (flag)
                                     break;
                                 case "3":
                                     Console.Clear();
+                                    Console.Write("Ingrese la ciudad: ");
+                                    string cityFilter = Console.ReadLine();
+
+                                    var usersByCity = db.GetUserByCity(cityFilter);
+
+                                    if (usersByCity.Count == 0)
+                                    {
+                                        Console.WriteLine($"No se encontraron usuarios en la ciudad {cityFilter}");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine($"Usuarios en {cityFilter}:");
+                                        foreach (var user in usersByCity)
+                                        {
+                                            Console.WriteLine($"{user.FirstName} {user.LastName} — {user.Email}");
+                                        }
+                                    }
                                     break;
                                 case "4":
                                     Console.Clear();
@@ -216,7 +251,6 @@ while (flag)
                                     string countryFilter = db.EmptyInputValidator("País: ");
                                     db.FilterByCountry(countryFilter);
                                     break;
-                                
                                 case "7":
                                     Console.Clear();
                                     Console.Write("\t---- Últimos usuarios registrados ----\n");
@@ -226,7 +260,6 @@ while (flag)
                                         Console.WriteLine($"Nombre: {user.FirstName} {user.LastName},\nEmail: {user.Email},\nFecha de registro: {user.CreatedAt}\n\n");
                                     }
                                     break;
-                                
                                 case "8":
                                     Console.Clear();
                                     Console.Write("\t---- Todos los usuarios ----\n");
@@ -236,7 +269,6 @@ while (flag)
                                         Console.WriteLine($"Nombre: {user.LastName} {user.FirstName},\nEmail: {user.Email}\n");
                                     }
                                     break;
-                                
                                 case "9":
                                     Console.Clear();
                                     menuList = false;
@@ -350,6 +382,25 @@ while (flag)
                                 
                                 case "3":
                                     Console.Clear();
+                                    Console.Write("Ingrese el correo del usuario: ");
+                                    string emailSearch = Console.ReadLine();
+
+                                    var userByEmail = db.GetUserByEmail(emailSearch);
+
+                                    if (userByEmail == null)
+                                    {
+                                        Console.WriteLine("No se encontro un usuario con ese correo.");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine($"Id: {userByEmail.Id}\n" +
+                                                          $"Nombre: {userByEmail.FirstName} {userByEmail.LastName}\n" +
+                                                          $"Usuario: {userByEmail.Username}\n" +
+                                                          $"Email: {userByEmail.Email}\n" +
+                                                          $"Ciudad: {userByEmail.City}\n" +
+                                                          $"País: {userByEmail.Country}\n" +
+                                                          $"Edad: {userByEmail.Age}");
+                                    }
                                     break;
                                 
                                 case "4":
@@ -378,7 +429,7 @@ while (flag)
             break;
         
         default:
-            Console.WriteLine("Ingrese una opcion valida!");
+            Console.WriteLine("Ingresa una opcion valida...");
             break;
     }
 }

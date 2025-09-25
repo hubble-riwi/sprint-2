@@ -127,17 +127,17 @@ public class UserController
         {
             if (UserNameTaken(user))
             {
-                Console.WriteLine("Nombre de usuario ya existe");
+                Console.WriteLine("Username already taken");
             }
             else if (EmailTaken(user))
             {
-                Console.WriteLine("Este usuario ya existe");
+                Console.WriteLine("Email already taken");
             }
             else
             {
                 db.users.Add(user);
-                Console.WriteLine("Usuario registrado con exito");
-                Console.WriteLine($"\tNombres: {user.FirstName}, \n\tApellidos = {user.LastName}, \n\tNombre de usuario = {user.Username} \n\tCorreo = {user.Email}");
+                Console.WriteLine("User successfully registered");
+                Console.WriteLine($"\tFirst name: {user.FirstName}, \n\tLastname = {user.LastName}, \n\tUsername = {user.Username} \n\tEmail = {user.Email}");
                 db.SaveChanges();
             }
         }
@@ -188,14 +188,14 @@ public class UserController
                     foreach (var user in result)
                     {
                         Console.Clear();
-                        Console.WriteLine($"\tNombres: {user.FirstName}, \n\tApellidos = {user.LastName}, \n\tNombre usuario: = {user.Username} \n\tCorreo: = {user.Email}");
+                        Console.WriteLine($"\tFirst name: {user.FirstName}, \n\tLastname = {user.LastName}, \n\tUsername = {user.Username} \n\tEmail = {user.Email}");
                         Console.WriteLine("");
                     }
                 }
                 else
                 {
                     Console.Clear();
-                    Console.WriteLine("Usurios no encontrados");
+                    Console.WriteLine("No users found");
                 }
             }
         }
@@ -211,14 +211,14 @@ public class UserController
                 {
                     foreach (var user in result)
                     {
-                        Console.WriteLine($"\tNombres: {user.FirstName}, \n\tApellidos = {user.LastName}, \n\tNombre de usuario = {user.Username} \n\tCorreo = {user.Email}, \n\tEdad = {user.Age}");
+                        Console.WriteLine($"\tFirst name: {user.FirstName}, \n\tLastname = {user.LastName}, \n\tUsername = {user.Username} \n\tEmail = {user.Email}, \n\tAge = {user.Age}");
                         Console.WriteLine("");
                     }
                 }
                 else
                 {
                     Console.Clear();
-                    Console.WriteLine("Usuario no encontrados");
+                    Console.WriteLine("No users found");
                 }
             }
         }
@@ -236,7 +236,7 @@ public class UserController
             }
             else
             {
-                Console.WriteLine("Se necesita un email, intentelo de nuevo");
+                Console.WriteLine("Value required, try again");
             }
         }
     }
@@ -252,7 +252,7 @@ public class UserController
             }
             else
             {
-                Console.WriteLine("Valor ingresado incorrecto");
+                Console.WriteLine("Value not a number");
             }
         }
     }
@@ -298,11 +298,11 @@ public class UserController
                 if (!string.IsNullOrWhiteSpace(Password)) user.Password = Password;
                 
                 db.SaveChanges();
-                Console.WriteLine($"Usuario con id {id} ha sido actualizado");
+                Console.WriteLine($"User {id} has been updated");
             }
             else
             {
-                Console.WriteLine("Usuario no encontrado");
+                Console.WriteLine("User not found");
             }
         }
         
@@ -402,6 +402,22 @@ public class UserController
         using (var db = new AppDbContext(Credentials))
         {
             return db.users.OrderBy(u => u.LastName).ToList();
+        }
+    }
+
+    public User? GetUserByEmail(String email)
+    {
+        using (var db = new AppDbContext(Credentials))
+        {
+            return db.users.FirstOrDefault(u => u.Email == email);
+        }
+    }
+
+    public List<User> GetUserByCity(string city)
+    {
+        using (var db = new AppDbContext(Credentials))
+        {
+            return db.users.Where(u => u.City.ToLower() == city.ToLower()).ToList();
         }
     }
 }
