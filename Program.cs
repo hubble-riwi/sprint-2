@@ -33,76 +33,76 @@ while (flag)
             break;
         
         case "2":
-        Console.WriteLine("Enter the ID of user if you want Update:");
+        Console.Write("Ingrese el id del usuario que desea actualizar: ");
         int id = int.Parse(Console.ReadLine());
         
-        Console.WriteLine("New name:");
+        Console.Write("Nuevo nombre:");
         firstName = Console.ReadLine();
         
-        Console.WriteLine("New last name:");
+        Console.Write("Nuevo apellido:");
          lastName = Console.ReadLine();
         
-        Console.WriteLine("New Username:");
+        Console.Write("Nuevo nombre usuario:");
         string username = Console.ReadLine();
         
-        Console.WriteLine("New email:");
+        Console.Write("Nuevo email:");
          email = Console.ReadLine();
         
-        Console.Write("New phone:");
+        Console.Write("Nuevo telefono:");
         string phone = Console.ReadLine();
         
-        Console.Write("New cellphone:");
+        Console.Write("Nuevo numero de celular:");
         string cellphone = Console.ReadLine();
         
-        Console.Write("New address:");
+        Console.Write("Nueva direccion:");
         string address = Console.ReadLine();
         
-        Console.Write("New city:");
+        Console.Write("Nuevo ciudad:");
         string city = Console.ReadLine();
         
-        Console.Write("New state:");
+        Console.Write("Nuevo estado:");
         string state = Console.ReadLine();
         
-        Console.Write("New zipcode:");
+        Console.Write("Nuevo codigo postal:");
         string zipcode = Console.ReadLine();
         
-        Console.Write("New country:");
+        Console.Write("Nuevo pais:");
         string country = Console.ReadLine();
 
         while (true)
         {
-            Console.WriteLine("New gender (Female, Male):");
-            gender = Console.ReadLine().ToLower().Trim();
+            Console.WriteLine("Nuevo genero (masculino, femenino):");
+            string gen = Console.ReadLine().ToLower().Trim();
 
-            if (gender != "male" && gender != "female")
+            if (gen != "masculino" && gen != "femenino")
             {
                 Console.WriteLine("Enter a valid gender");
                     continue;
             }
             else
             {
-                Console.WriteLine("The gender has updated ");
-                    break;
+                gender = gen == "male" ? "male" : "female";
+                break;
             }
         }
         
-        Console.Write("New age:");
+        Console.Write("Nueva edad:");
         int age = int.Parse(Console.ReadLine());
         
-        Console.Write("New password (OPTIONAL):");
+        Console.Write("Nueva contraseña (opcional): ");
          password = Console.ReadLine();
         
-        Console.Write("Confirm the new password:");
+        Console.Write("Confirme la contraseña: ");
         string confirmPassword = Console.ReadLine();
 
         if (password != confirmPassword)
         {
-            Console.WriteLine("The password dont match...dont update the password");
+            Console.WriteLine("Las contraseñas no coinciden");
             password = null;
         }
         else
         {
-            Console.WriteLine("The password has been update for the user ...");
+            Console.WriteLine("Las contraseñas han sido actualizadas");
         }
         
         
@@ -165,20 +165,20 @@ while (flag)
                                     foreach (User user in listUser)
                                     {
                                         Console.WriteLine($"- Id: {user.Id} \n" +
-                                                          $"- First name: {user.FirstName}\n" +
-                                                          $"- Last name: {user.LastName}\n" +
-                                                          $"- Username: {user.Username}\n" +
-                                                          $"- Email: {user.Email} \n" +
-                                                          $"- Phone: {user.Phone} \n" +
-                                                          $"- Cellphone: {user.CellPhone} \n" +
-                                                          $"- Addres: {user.Address} \n" +
-                                                          $"- City: {user.City} \n" +
-                                                          $"- State: {user.State} \n" +
-                                                          $"- Zipcode: {user.Zipcode} \n" +
-                                                          $"- Country: {user.Country} \n" +
-                                                          $"- Gender: {user.Gender} \n" +
-                                                          $"- Age: {user.Age} \n" +
-                                                          $"- Password: {user.Password?? "Sin contraseña"}");
+                                                          $"- Nombres: {user.FirstName}\n" +
+                                                          $"- Apellidos: {user.LastName}\n" +
+                                                          $"- Nombre de usuario: {user.Username}\n" +
+                                                          $"- Correo: {user.Email} \n" +
+                                                          $"- Telefono: {user.Phone} \n" +
+                                                          $"- Numero de celular: {user.CellPhone} \n" +
+                                                          $"- Direccion: {user.Address} \n" +
+                                                          $"- Ciudad: {user.City} \n" +
+                                                          $"- Estado: {user.State} \n" +
+                                                          $"- Codigo postal: {user.Zipcode} \n" +
+                                                          $"- Pais: {user.Country} \n" +
+                                                          $"- Genero: {user.Gender} \n" +
+                                                          $"- Edad: {user.Age} \n" +
+                                                          $"- Contraseña: {user.Password?? "Sin contraseña"}");
                                     }
                                     break;
                                 case "3":
