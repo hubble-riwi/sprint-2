@@ -16,7 +16,7 @@ while (flag)
                   "5. Salir\n" +
                   ">> ");
     string option = Console.ReadLine();
-
+    string gender;
     switch (option)
     {
         case "1":
@@ -28,8 +28,84 @@ while (flag)
             User newUser = new User(firstName, lastName, userName, email, password);
             db.RegisterUser(newUser);
             break;
+        
         case "2":
+        Console.WriteLine("Enter the ID of user if you want Update:");
+        int id = int.Parse(Console.ReadLine());
+        
+        Console.WriteLine("New name:");
+        firstName = Console.ReadLine();
+        
+        Console.WriteLine("New last name:");
+         lastName = Console.ReadLine();
+        
+        Console.WriteLine("New Username:");
+        string username = Console.ReadLine();
+        
+        Console.WriteLine("New email:");
+         email = Console.ReadLine();
+        
+        Console.Write("New phone:");
+        string phone = Console.ReadLine();
+        
+        Console.Write("New cellphone:");
+        string cellphone = Console.ReadLine();
+        
+        Console.Write("New address:");
+        string address = Console.ReadLine();
+        
+        Console.Write("New city:");
+        string city = Console.ReadLine();
+        
+        Console.Write("New state:");
+        string state = Console.ReadLine();
+        
+        Console.Write("New zipcode:");
+        string zipcode = Console.ReadLine();
+        
+        Console.Write("New country:");
+        string country = Console.ReadLine();
 
+        while (true)
+        {
+            Console.WriteLine("New gender (Female, Male):");
+            gender = Console.ReadLine().ToLower().Trim();
+
+            if (gender != "male" && gender != "female")
+            {
+                Console.WriteLine("Enter a valid gender");
+                    continue;
+            }
+            else
+            {
+                Console.WriteLine("The gender has updated ");
+                    break;
+            }
+        }
+        
+        Console.Write("New age:");
+        int age = int.Parse(Console.ReadLine());
+        
+        Console.Write("New password (OPTIONAL):");
+         password = Console.ReadLine();
+        
+        Console.Write("Confirm the new password:");
+        string confirmPassword = Console.ReadLine();
+
+        if (password != confirmPassword)
+        {
+            Console.WriteLine("The password dont match...dont update the password");
+            password = null;
+        }
+        else
+        {
+            Console.WriteLine("The password has been update for the user ...");
+        }
+        
+        
+        //call the controller
+        db.UpdateUser(id,firstName,lastName,username,email,phone,cellphone,address,city,state,zipcode,country,gender,age,password);
+        break;
             break;
         
         case "3":
@@ -74,14 +150,14 @@ while (flag)
                                 case "3":
                                     break;
                                 case "4":
-                                    int age = db.IntegerInputValidator("Age: ");
-                                    db.FilterByAge(age);
+                                    int ageFilter = db.IntegerInputValidator("Age: ");
+                                    db.FilterByAge(ageFilter);
                                     break;
                                 case "5":
                                     break;
                                 case "6":
-                                    string country = db.EmptyInputValidator("País: ");
-                                    db.FilterByCountry(country);
+                                    string countryFilter = db.EmptyInputValidator("País: ");
+                                    db.FilterByCountry(countryFilter);
                                     break;
                                 case "7":
                                     break;
