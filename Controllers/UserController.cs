@@ -2,6 +2,7 @@ using System.Globalization;
 using sprint_2.Data;
 using sprint_2.Models;
 
+
 namespace sprint_2.Controllers;
 
 public class UserController
@@ -386,6 +387,16 @@ public class UserController
         using (var db = new AppDbContext(Credentials))
         {
             return db.users.Where(u => string.IsNullOrEmpty(u.Address)).ToList();
+        }
+    }
+
+    public bool FindUserById(int id, out User? user)
+    {
+        using (var db = new AppDbContext(Credentials))
+        {
+            user = db.users.ToList().FirstOrDefault(u => u.Id == id);
+
+            return user != null;
         }
     }
 }

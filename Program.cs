@@ -338,7 +338,40 @@ while (flag)
                                     break;
                                 
                                 case "4":
-                                    Console.Clear();
+                                    Console.Write("Input the user id: ");
+                                    string validation = Console.ReadLine();
+
+                                    if (int.TryParse(validation, out var Id))
+                                    {
+                                        if (db.FindUserById(Id, out var user))
+                                        {
+                                            
+                                            Console.WriteLine($"User: \n" +
+                                                              $"- Id: {user.Id} \n" +
+                                                              $"- First name: {user.FirstName}\n" +
+                                                              $"- Last name: {user.LastName}\n" +
+                                                              $"- Username: {user.Username}\n" +
+                                                              $"- Email: {user.Email} \n" +
+                                                              $"- Phone: {user.Phone} \n" +
+                                                              $"- Cellphone: {user.CellPhone} \n" +
+                                                              $"- Addres: {user.Address} \n" +
+                                                              $"- City: {user.City} \n" +
+                                                              $"- State: {user.State} \n" +
+                                                              $"- Zipcode: {user.Zipcode} \n" +
+                                                              $"- Country: {user.Country} \n" +
+                                                              $"- Gender: {user.Gender} \n" +
+                                                              $"- Age: {user.Age} \n" +
+                                                              $"- Password: {user.Password?? "Sin contraseña"} \n   ");
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("User not found");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Input valid field");
+                                    }
                                     break;
                                 case "5":
                                     Console.Clear();
